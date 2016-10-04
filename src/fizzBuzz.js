@@ -17,5 +17,16 @@
  * 
  */
 module.exports = ( length ) => {
+  const arr = [];
 
+  if (typeof length !== 'number' || length < 1) return arr;
+
+  for (let i = 1; i <= length; i++) {
+    let val = '';
+    if (i % 3 == 0) val += 'fizz';  
+    if (i % 5 == 0) val += 'buzz';
+    arr.push(val === '' ? i : val);   
+  }
+  
+  return arr;
 };

@@ -13,6 +13,20 @@
  *   returns: [ 'ant', 'apple', 'aardvark', 'allegory' ]
  * 
  */
-module.exports = ( input, test ) => {
+const deepSpaceNine = ( input, test, results=[] ) => {
+  for (let kind of input) {
+    if (typeof kind === 'string' && test(kind)) results.push (kind);
 
+    if (kind.isArray) deepSpaceNine(kind, test, results);
+
+    if (typeof kind === 'object') {
+      for (let prop in kind) {
+        deepSpaceNine([kind[prop]], test, results);
+      }
+    }
+  }
+  
+  return results;
 };
+
+module.exports = deepSpaceNine;
